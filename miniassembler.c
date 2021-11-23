@@ -9,13 +9,15 @@
 
 /*--------------------------------------------------------------------*/
 /* Modify *puiDest in place,
-   setting iNumBits starting at iDestStartBit (where 0 is
+   setting uiNumBits starting at uiDestStartBit (where 0 indicates
    the least significant bit) with bits taken from uiSrc,
-   starting at iSrcStartBit.
+   starting at uiSrcStartBit.
+   uiSrcStartBit indicates the rightmost bit in the field.
    setField sets the appropriate bits in *puiDest to 1.
    setField never unsets any bits in *puiDest.                        */
-static void setField(unsigned int uiSrc, int iSrcStartBit,
-       unsigned int *puiDest, int iDestStartBit, int iNumBits)
+static void setField(unsigned int uiSrc, unsigned int uiSrcStartBit,
+                     unsigned int *puiDest, unsigned int uiDestStartBit,
+                     unsigned int uiNumBits)
 {
    /* Your code here */
 

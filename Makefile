@@ -5,15 +5,12 @@
 
 # This is not a proper Makefile.  It does not maintain .o files.
 
-all: grader dataB testminiassembler.out dataA dataAplus
+all: dataB testminiassembler.out dataA dataAplus
 
 clean:
 	rm -f grader dataB dataA dataAplus
 	rm -f createdataB createdataA createdataAplus
 	rm -f testminiassembler testminiassembler.out
-
-grader: grader.c
-	gcc217 -O -fomit-frame-pointer grader.c -o grader
 
 dataB: createdataB
 	./createdataB

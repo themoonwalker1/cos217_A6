@@ -8,7 +8,7 @@
 all: dataB testminiassembler.out dataA dataAplus
 
 clean:
-	rm -f grader dataB dataA dataAplus
+	rm -f dataB dataA dataAplus
 	rm -f createdataB createdataA createdataAplus
 	rm -f testminiassembler testminiassembler.out
 

@@ -19,16 +19,20 @@ static void setField(unsigned int uiSrc, unsigned int uiSrcStartBit,
                      unsigned int *puiDest, unsigned int uiDestStartBit,
                      unsigned int uiNumBits)
 {
-   /* Your code here */
-
+   int i = 0;
+   while (i < uiNumBits) {
+       int uiSrcBitValue = (uiSrc >> (uiSrcStartBit + i)) & 1;
+       *puiDest |= uiSrcBitValue << (uiDestStartBit + i);
+       i++;
+   }
 }
 
 /*--------------------------------------------------------------------*/
 
 unsigned int MiniAssembler_mov(unsigned int uiReg, int iImmed)
 {
-   /* Your code here */
-
+   assert(uiReg >= 0);
+   assert(uiReg <= 31);
 }
 
 /*--------------------------------------------------------------------*/

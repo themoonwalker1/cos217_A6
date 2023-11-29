@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------
- * createdataB.c
+ * createdataA.c
  * Author: Praneeth Bhandaru
  *
  * Produces a file called dataB with the student name, a nullbyte,

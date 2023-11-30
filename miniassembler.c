@@ -104,3 +104,26 @@ unsigned int MiniAssembler_b(unsigned long ulAddr,
     return uiInstr;
 
 }
+
+/* Return the machine language equivalent of "bl addr".
+   Parameters:
+      ulAddr: the address denoted by addr, that is, the address to
+         which the branch should occur (must be a multiple of 4).
+      ulAddrOfThisInstr: the address of the bl instruction itself
+         (must be a multiple of 4).                                   */
+
+unsigned int MiniAssembler_bl(unsigned long ulAddr, unsigned long ulAddrOfThisInstr)
+{
+    unsigned int uiInstr;
+
+    /* Base Instruction Code for BL (branch with link) */
+    uiInstr = 0x94000000;
+
+    /* Calculate the relative displacement */
+    unsigned long relativeAddr = (ulAddr - ulAddrOfThisInstr) >> 2;
+
+    /* Set the displacement in the instruction */
+    setField((unsigned int)relativeAddr, 0, &uiInstr, 0, 26);
+
+    return uiInstr;
+}

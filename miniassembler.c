@@ -18,7 +18,7 @@
 static void setField(unsigned int uiSrc, unsigned int uiSrcStartBit,
                      unsigned int *puiDest, unsigned int uiDestStartBit,
                      unsigned int uiNumBits) {
-    int i = 0;
+    unsigned int i = 0;
     while (i < uiNumBits) {
         int uiSrcBitValue = (uiSrc >> (uiSrcStartBit + i)) & 1;
         *puiDest |= uiSrcBitValue << (uiDestStartBit + i);
@@ -29,10 +29,9 @@ static void setField(unsigned int uiSrc, unsigned int uiSrcStartBit,
 /*--------------------------------------------------------------------*/
 
 unsigned int MiniAssembler_mov(unsigned int uiReg, int iImmed) {
-    assert(uiReg >= 0);
-    assert(uiReg <= 31);
-
     unsigned int uiInstr;
+
+    assert(uiReg <= 31);
 
     /* Base Instruction Code for mov */
     uiInstr = 0x52800000;
@@ -91,12 +90,13 @@ unsigned int MiniAssembler_strb(unsigned int uiFromReg,
 unsigned int MiniAssembler_b(unsigned long ulAddr,
                              unsigned long ulAddrOfThisInstr) {
     unsigned int uiInstr;
+    unsigned long relativeAddr;
 
     /* Base Instruction Code for b */
     uiInstr = 0x14000000;
 
     /* Calculate the relative displacement */
-    unsigned long relativeAddr = (ulAddr - ulAddrOfThisInstr) >> 2;
+    relativeAddr = (ulAddr - ulAddrOfThisInstr) >> 2;
 
     /* Set displacement */
     setField((unsigned int) relativeAddr, 0, &uiInstr, 0, 26);

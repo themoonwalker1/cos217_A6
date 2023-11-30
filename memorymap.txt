@@ -120,27 +120,27 @@ Address (in hex) | Content (in hex) | Description
 
 BSS:
 
-Address (in hex) | Description
+Address (in hex) | Description (intended)
 ------------------------------------------------------------------------
-0x420058         | Index 0 of the name array
-0x420059         | Index 1 of the name array
-0x420060         | Index 2 of the name array
-0x420061         | Index 3 of the name array
-0x420062         | Index 4 of the name array
-0x420063         | Index 5 of the name array
-0x420064         | Index 6 of the name array
-0x420065         | Index 7 of the name array
-0x420066         | Index 8 of the name array
-0x420067         | Index 9 of the name array
-0x420068         | Index 10 of the name array
-0x420069         | Index 11 of the name array
-0x420070         | Index 12 of the name array
-0x420071         | Index 13 of the name array
-0x420072         | Index 14 of the name array
-0x420073         | Index 15 of the name array
-0x420074         | Index 16 of the name array
-0x420075         | Index 17 of the name array
-0x420076         | Index 18 of the name array
+0x420058         | C
+0x420059         | H
+0x420060         | I
+0x420061         | N
+0x420062         | M
+0x420063         | A
+0x420064         | Y
+0x420065         |
+0x420066         | B
+0x420067         | H
+0x420068         | A
+0x420069         | N
+0x420070         | D
+0x420071         | A
+0x420072         | R
+0x420073         | U
+0x420074         | \0
+0x420075         | \0
+0x420076         |
 0x420077         | Index 19 of the name array
 0x420078         | Index 20 of the name array
 0x420079         | Index 21 of the name array

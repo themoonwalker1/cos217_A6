@@ -76,7 +76,18 @@ unsigned int MiniAssembler_adr(unsigned int uiReg, unsigned long ulAddr,
 unsigned int MiniAssembler_strb(unsigned int uiFromReg,
    unsigned int uiToReg)
 {
+    unsigned int uiInstr;
 
+    /* Base Instruction Code for STRB (store byte) */
+    uiInstr = 0xB9000000;
+
+    /* Set source (fromreg) register */
+    setField(uiFromReg, 0, &uiInstr, 5, 5);
+
+    /* Set destination (toreg) register */
+    setField(uiToReg, 0, &uiInstr, 0, 5);
+
+    return uiInstr;
 }
 
 /*--------------------------------------------------------------------*/

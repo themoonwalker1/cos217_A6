@@ -79,7 +79,7 @@ unsigned int MiniAssembler_strb(unsigned int uiFromReg,
     unsigned int uiInstr;
 
     /* Base Instruction Code for STRB (store byte) */
-    uiInstr = 0xB9000000;
+    uiInstr = 0x39000000;
 
     /* Set source (fromreg) register */
     setField(uiFromReg, 0, &uiInstr, 5, 5);

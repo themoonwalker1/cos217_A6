@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include "miniassembler.h"
 
-static const unsigned int lReturnAddress = 0x420078;
+static const unsigned int lReturnAddress = 0x42006C;
 static const char sName[] = "Chinmay Bhandaru";
 
 
@@ -25,7 +25,7 @@ int main(void) {
     unsigned int uiInstr;
 
     /* Open/create file dataB with write privileges */
-    FILE *psFile = fopen("dataB", "w");
+    FILE *psFile = fopen("dataA", "w");
 
     /* Print the stored name into dataB */
     fprintf(psFile, sName);

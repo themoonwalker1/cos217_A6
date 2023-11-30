@@ -140,22 +140,22 @@ Address (in hex) | Description (intended)
 0x420073         | U
 0x420074         | \0
 0x420075         | \0
-0x420076         |
-0x420077         | Index 19 of the name array
-0x420078         | Index 20 of the name array
-0x420079         | Index 21 of the name array
-0x420080         | Index 22 of the name array
-0x420081         | Index 23 of the name array
-0x420082         | Index 24 of the name array
-0x420083         | Index 25 of the name array
-0x420084         | Index 26 of the name array
-0x420085         | Index 27 of the name array
-0x420086         | Index 28 of the name array
-0x420087         | Index 29 of the name array
-0x420088         | Index 30 of the name array
-0x420089         | Index 31 of the name array
-0x420090         | Index 32 of the name array
-0x420091         | Index 33 of the name array
+0x420076         | mov
+0x420077         | mov
+0x420078         | mov
+0x420079         | mov
+0x420080         | adr
+0x420081         | adr
+0x420082         | adr
+0x420083         | adr
+0x420084         | strb
+0x420085         | strb
+0x420086         | strb
+0x420087         | strb
+0x420088         | b
+0x420089         | b
+0x420090         | b
+0x420091         | b
 0x420092         | Index 34 of the name array
 0x420093         | Index 35 of the name array
 0x420094         | Index 36 of the name array

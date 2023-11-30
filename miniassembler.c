@@ -17,24 +17,22 @@
    setField never unsets any bits in *puiDest.                        */
 static void setField(unsigned int uiSrc, unsigned int uiSrcStartBit,
                      unsigned int *puiDest, unsigned int uiDestStartBit,
-                     unsigned int uiNumBits)
-{
-   int i = 0;
-   while (i < uiNumBits) {
-       int uiSrcBitValue = (uiSrc >> (uiSrcStartBit + i)) & 1;
-       *puiDest |= uiSrcBitValue << (uiDestStartBit + i);
-       i++;
-   }
+                     unsigned int uiNumBits) {
+    int i = 0;
+    while (i < uiNumBits) {
+        int uiSrcBitValue = (uiSrc >> (uiSrcStartBit + i)) & 1;
+        *puiDest |= uiSrcBitValue << (uiDestStartBit + i);
+        i++;
+    }
 }
 
 /*--------------------------------------------------------------------*/
 
-unsigned int MiniAssembler_mov(unsigned int uiReg, int iImmed)
-{
-   assert(uiReg >= 0);
-   assert(uiReg <= 31);
+unsigned int MiniAssembler_mov(unsigned int uiReg, int iImmed) {
+    assert(uiReg >= 0);
+    assert(uiReg <= 31);
 
-   unsigned int uiInstr;
+    unsigned int uiInstr;
 
     /* Base Instruction Code for MOV (immediate) */
     uiInstr = 0x52800000;
@@ -51,31 +49,29 @@ unsigned int MiniAssembler_mov(unsigned int uiReg, int iImmed)
 /*--------------------------------------------------------------------*/
 
 unsigned int MiniAssembler_adr(unsigned int uiReg, unsigned long ulAddr,
-   unsigned long ulAddrOfThisInstr)
-{
-   unsigned int uiInstr;
-   unsigned int uiDisp;
+                               unsigned long ulAddrOfThisInstr) {
+    unsigned int uiInstr;
+    unsigned int uiDisp;
 
-   /* Base Instruction Code */
-   uiInstr = 0x10000000;
+    /* Base Instruction Code */
+    uiInstr = 0x10000000;
 
-   /* register to be inserted in instruction */
-   setField(uiReg, 0, &uiInstr, 0, 5);
+    /* register to be inserted in instruction */
+    setField(uiReg, 0, &uiInstr, 0, 5);
 
-   /* displacement to be split into immlo and immhi and inserted */
-   uiDisp = (unsigned int)(ulAddr - ulAddrOfThisInstr);
+    /* displacement to be split into immlo and immhi and inserted */
+    uiDisp = (unsigned int) (ulAddr - ulAddrOfThisInstr);
 
-   setField(uiDisp, 0, &uiInstr, 29, 2);
-   setField(uiDisp, 2, &uiInstr, 5, 19);
+    setField(uiDisp, 0, &uiInstr, 29, 2);
+    setField(uiDisp, 2, &uiInstr, 5, 19);
 
-   return uiInstr;
+    return uiInstr;
 }
 
 /*--------------------------------------------------------------------*/
 
 unsigned int MiniAssembler_strb(unsigned int uiFromReg,
-   unsigned int uiToReg)
-{
+                                unsigned int uiToReg) {
     unsigned int uiInstr;
 
     /* Base Instruction Code for STRB (store byte) */
@@ -93,8 +89,18 @@ unsigned int MiniAssembler_strb(unsigned int uiFromReg,
 /*--------------------------------------------------------------------*/
 
 unsigned int MiniAssembler_b(unsigned long ulAddr,
-   unsigned long ulAddrOfThisInstr)
-{
-   /* Your code here */
+                             unsigned long ulAddrOfThisInstr) {
+    unsigned int uiInstr;
+
+    /* Base Instruction Code for B (branch) */
+    uiInstr = 0x14000000;
+
+    /* Calculate the relative displacement */
+    unsigned long relativeAddr = (ulAddr - ulAddrOfThisInstr) >> 2;
+
+    /* Set the displacement in the instruction */
+    setField((unsigned int) relativeAddr, 0, &uiInstr, 0, 26);
+
+    return uiInstr;
 
 }

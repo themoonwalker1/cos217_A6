@@ -82,10 +82,10 @@ unsigned int MiniAssembler_strb(unsigned int uiFromReg,
     uiInstr = 0x39000000;
 
     /* Set source (fromreg) register */
-    setField(uiFromReg, 0, &uiInstr, 5, 5);
+    setField(uiFromReg, 0, &uiInstr, 0, 5);
 
     /* Set destination (toreg) register */
-    setField(uiToReg, 0, &uiInstr, 0, 5);
+    setField(uiToReg, 0, &uiInstr, 5, 5);
 
     return uiInstr;
 }

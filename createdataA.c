@@ -49,7 +49,7 @@ int main(void) {
 
     fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
-    uiInstr = MiniAssembler_b(0x40089c, 0x420078);
+    uiInstr = MiniAssembler_b(0x400670, 0x420078);
 
     fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 

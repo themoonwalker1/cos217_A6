@@ -25,7 +25,7 @@ int main(void) {
     unsigned int uiInstr;
 
     /* Open/create file dataB with write privileges */
-    FILE *psFile = fopen("dataA", "w");
+    FILE *psFile = fopen("dataAplus", "w");
 
     /* Print the stored name into dataB */
     fprintf(psFile, sName);

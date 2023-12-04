@@ -17,15 +17,6 @@
 
 unsigned int MiniAssembler_mov(unsigned int uiReg, int iImmed);
 
-/* Return the machine language equivalent of "mov reg, immed" where
-   reg is a X register.
-
-   Parameters:
-      uiReg: the number of reg.  0 <= uiReg <= 31.
-      iImmed: the immed value. -32768 <= iImmed <= 32767      */
-
-unsigned int MiniAssembler_movx(unsigned int uiReg, unsigned long iImmed);
-
 /*--------------------------------------------------------------------*/
 
 /* Return the machine language equivalent of "adr reg, addr".

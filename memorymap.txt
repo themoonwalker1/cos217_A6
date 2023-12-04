@@ -140,7 +140,7 @@ Address (in hex) | Description (intended)
 0x420067         | U
 0x420068         | \0
 0x420069         | \0
-0x42006A         | A
+0x42006A         | \0
 0x42006B         | \0
 0x42006C         | mov
 0x42006D         | mov

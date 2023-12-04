@@ -45,6 +45,23 @@ unsigned int MiniAssembler_mov(unsigned int uiReg, int iImmed) {
     return uiInstr;
 }
 
+unsigned int MiniAssembler_movx(unsigned int uiReg, unsigned long iImmed) {
+    unsigned int uiInstr;
+
+    assert(uiReg <= 31);
+
+    /* Base Instruction Code for mov */
+    uiInstr = 0x92800000;
+
+    /* destination register */
+    setField(uiReg, 0, &uiInstr, 0, 4);
+
+    /* immediate value */
+    setField(iImmed, 0, &uiInstr, 10, 21);
+
+    return uiInstr;
+}
+
 /*--------------------------------------------------------------------*/
 
 unsigned int MiniAssembler_adr(unsigned int uiReg, unsigned long ulAddr,

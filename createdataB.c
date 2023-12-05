@@ -34,7 +34,7 @@ int main(void) {
     }
 
     /* Overwrite x30 with address of 'grade = 'B'' instruction */
-    fwrite(&lReturnAddress, sizeof(unsigned int), 1, psFile);
+    (void) fwrite(&lReturnAddress, sizeof(unsigned int), 1, psFile);
 
     /* Close the file */
     fclose(psFile);

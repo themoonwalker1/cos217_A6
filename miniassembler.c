@@ -20,7 +20,7 @@ static void setField(unsigned int uiSrc, unsigned int uiSrcStartBit,
                      unsigned int uiNumBits) {
     unsigned int i = 0;
     while (i < uiNumBits) {
-        int uiSrcBitValue = (uiSrc >> (uiSrcStartBit + i)) & 1;
+        unsigned int uiSrcBitValue = (uiSrc >> (uiSrcStartBit + i)) & 1;
         *puiDest |= uiSrcBitValue << (uiDestStartBit + i);
         i++;
     }

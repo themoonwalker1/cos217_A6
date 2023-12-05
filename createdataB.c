@@ -17,8 +17,8 @@ static const char sName[] = "Chinmay Bhandaru";
 
 
 /* Takes no parameters. Opens (and potentially creates) file 'dataB'.
- * Writes a name, nullbyte, padding, and a binary memory address to the
- * file. Returns 0 upon completion. */
+ * Writes content to 'dataB' that results in a grade of 'B' being
+ * assigned. Returns 0 upon completion. */
 int main(void) {
     int i;
 

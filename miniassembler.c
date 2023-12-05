@@ -32,6 +32,8 @@ unsigned int MiniAssembler_mov(unsigned int uiReg, int iImmed) {
     unsigned int uiInstr;
 
     assert(uiReg <= 31);
+    assert(iImmed >= -32768);
+    assert(iImmed <= 32767);
 
     /* Base Instruction Code for mov */
     uiInstr = 0x52800000;
@@ -51,6 +53,10 @@ unsigned int MiniAssembler_adr(unsigned int uiReg, unsigned long ulAddr,
                                unsigned long ulAddrOfThisInstr) {
     unsigned int uiInstr;
     unsigned int uiDisp;
+
+    assert(uiReg <= 31);
+    assert(ulAddr % 4 == 0);
+    assert(ulAddrOfThisInstr % 4 == 0);
 
     /* Base Instruction Code for adr */
     uiInstr = 0x10000000;
@@ -73,6 +79,9 @@ unsigned int MiniAssembler_strb(unsigned int uiFromReg,
                                 unsigned int uiToReg) {
     unsigned int uiInstr;
 
+    assert(uiFromReg <= 31);
+    assert(uiToReg <= 31);
+
     /* Base Instruction Code for strb */
     uiInstr = 0x39000000;
 
@@ -92,6 +101,9 @@ unsigned int MiniAssembler_b(unsigned long ulAddr,
     unsigned int uiInstr;
     unsigned long relativeAddr;
 
+    assert(ulAddr % 4 == 0);
+    assert(ulAddrOfThisInstr % 4 == 0);
+
     /* Base Instruction Code for b */
     uiInstr = 0x14000000;
 
@@ -105,25 +117,21 @@ unsigned int MiniAssembler_b(unsigned long ulAddr,
 
 }
 
-/* Return the machine language equivalent of "bl addr".
-   Parameters:
-      ulAddr: the address denoted by addr, that is, the address to
-         which the branch should occur (must be a multiple of 4).
-      ulAddrOfThisInstr: the address of the bl instruction itself
-         (must be a multiple of 4).                                   */
-
 unsigned int MiniAssembler_bl(unsigned long ulAddr, unsigned long ulAddrOfThisInstr)
 {
     unsigned int uiInstr;
     unsigned long relativeAddr;
 
-    /* Base Instruction Code for BL (branch with link) */
+    assert(ulAddr % 4 == 0);
+    assert(ulAddrOfThisInstr % 4 == 0);
+
+    /* Base Instruction Code for bl (branch with link) */
     uiInstr = 0x94000000;
 
     /* Calculate the relative displacement */
     relativeAddr = (ulAddr - ulAddrOfThisInstr) >> 2;
 
-    /* Set the displacement in the instruction */
+    /* Set displacement */
     setField((unsigned int)relativeAddr, 0, &uiInstr, 0, 26);
 
     return uiInstr;

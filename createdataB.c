@@ -12,7 +12,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/* Return address stored in getName's x30 after buffer overrun */
 static const unsigned int lReturnAddress = 0x00400890;
+
+/* char array containing my name */
 static const char sName[] = "Chinmay Bhandaru";
 
 

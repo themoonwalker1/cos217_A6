@@ -55,7 +55,6 @@ unsigned int MiniAssembler_adr(unsigned int uiReg, unsigned long ulAddr,
     unsigned int uiDisp;
 
     assert(uiReg <= 31);
-    assert(ulAddr % 4 == 0);
     assert(ulAddrOfThisInstr % 4 == 0);
 
     /* Base Instruction Code for adr */

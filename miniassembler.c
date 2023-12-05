@@ -42,7 +42,7 @@ unsigned int MiniAssembler_mov(unsigned int uiReg, int iImmed) {
     setField(uiReg, 0, &uiInstr, 0, 5);
 
     /* immediate value */
-    setField(iImmed, 0, &uiInstr, 5, 16);
+    setField((unsigned int)iImmed, 0, &uiInstr, 5, 16);
 
     return uiInstr;
 }
